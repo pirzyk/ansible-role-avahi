@@ -27,5 +27,3 @@ galaxy_info:
     - avahi
     - mdns
     - zeroconf
-dependencies:
-  - role: trombik.dbus
