@@ -1,0 +1,15 @@
+<?xml version="1.0" standalone='no'?>
+<!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+<!-- {{ ansible_managed }} -->
+<service-group>
+  <name replace-wildcards="yes">%h</name>
+{% for s in content %}
+  <service>
+{% for k, v in s|dictsort %}{% if v is iterable and v is not string %}{% for w in v|list %}
+    <{{ k }}>{{ w }}</{{ k }}>
+{% endfor %}{% else %}
+    <{{ k }}>{{ v }}</{{ k }}>
+{% endif %}{% endfor %}
+  </service>
+{% endfor %}
+</service-group>

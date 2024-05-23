@@ -5,12 +5,25 @@
 
 - include_tasks: "install-{{ ansible_os_family }}.yml"
 
-- name: Create avahi_conf_dir
+- name: "Create avahi_conf_dir {{ avahi_conf_dir }}"
   file:
     path: "{{ avahi_conf_dir }}"
     state: directory
 
-- name: Create avahi-daemon.conf
+- name: Create avahi-daemon service files
+  template:
+    src: avahi-service.xml.j2
+    dest: "{{ item.filename }}"
+    owner: root
+    group: wheel
+    mode: '0644'
+  loop: "{{ avahi_service_config }}"
+  loop_control:
+    label: "{{ item.filename }}"
+  vars:
+    content: "{{ item.content }}"
+
+- name: "Create {{ avahi_conf_file }}"
   template:
     src: avahi-daemon.conf.j2
     dest: "{{ avahi_conf_file }}"

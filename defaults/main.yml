@@ -9,3 +9,10 @@ avahi_daemon_flags: "{{ __avahi_daemon_flags }}"
 avahi_mdns_packages: "{{ __avahi_mdns_package }}"
 avahi_nss_switch_file: "{{ __avahi_nss_switch_file }}"
 avahi_nss_switch_hosts: "files dns mdns"
+avahi_service_config: []
+#  - filename: "{{ __avahi_conf_dir }}/services/ssh.service"
+#    content:
+#      - { type: _ssh._tcp, port: 22 }
+#  - filename: "{{ __avahi_conf_dir }}/services/sftp-ssh.service"
+#    content:
+#      - { type: _sftp-ssh._tcp, port: 22 }
